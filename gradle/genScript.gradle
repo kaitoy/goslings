@@ -1,0 +1,30 @@
+/*
+ * Goslings - Git Objects Browser
+ * https://github.com/kaitoy/goslings
+ * MIT licensed
+ *
+ * Copyright (C) 2016 Kaito Yamada
+ */
+
+import org.gradle.internal.os.OperatingSystem;
+
+def scriptDir = new File("${buildDir}/script")
+if (!scriptDir.exists()) {
+  scriptDir.mkdirs()
+}
+
+task genScript {
+  if (OperatingSystem.current().isWindows()) {
+    new File(scriptDir, "start.bat").withWriter { out ->
+      out.println "@echo off"
+      out.println "\"%JAVA_HOME%\\bin\\java\" -Dcom.github.kaitoy.goslings.server.reposDir=%2 -Dcom.github.kaitoy.goslings.server.uriPrefix=%3 -jar \"${project(':goslings-server').buildDir}/libs/goslings-server-${version}.jar\" --server.port=%1"
+    }
+  }
+  else {
+    new File(scriptDir, "start.sh").withWriter { out ->
+      out.println "#!/bin/sh"
+      out.println "\$JAVA_HOME/bin/java -Dcom.github.kaitoy.goslings.server.reposDir=\$2 -Dcom.github.kaitoy.goslings.server.uriPrefix=\$3 -jar ${project(':goslings-server').buildDir}/libs/goslings-server-${version}.jar --server.port=\$1"
+    }
+  }
+}
+

@@ -1,0 +1,6 @@
+rootProject.name = 'goslings'
+
+include(
+  'goslings-client',
+  'goslings-server',
+)

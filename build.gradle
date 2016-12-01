@@ -1,0 +1,90 @@
+/*
+ * Goslings - Git Objects Browser
+ * https://github.com/kaitoy/goslings
+ * MIT licensed
+ *
+ * Copyright (C) 2016 Kaito Yamada
+ */
+
+buildscript {
+  repositories {
+    maven {
+      url 'https://plugins.gradle.org/m2/'
+    }
+  }
+  dependencies {
+    classpath "com.moowork.gradle:gradle-node-plugin:${nodePluginVer}"
+  }
+}
+
+allprojects {
+  version = '0.0.1'
+}
+
+project(':goslings-client') {
+  apply plugin: 'com.moowork.node'
+
+  node {
+    version = nodeVer
+    yarnVersion = yarnVer
+    download = true
+  }
+
+  def logsDir = file 'logs'
+  def log = new File(logsDir, 'build.log')
+  def errLog = new File(logsDir, 'build.err.log')
+  def lsep = System.properties['line.separator']
+  def cacheDir = file '.gradle'
+  def buildDir = file 'dist'
+  def nodeModsDir = file 'node_modules'
+
+  if (!logsDir.exists()) {
+    logsDir.mkdir()
+  }
+  else {
+    delete log
+    delete errLog
+  }
+
+  yarnSetup {
+    execOverrides {
+      it.standardOutput = new FileOutputStream(log, true)
+      it.errorOutput = new FileOutputStream(errLog, true)
+    }
+    doFirst { log << "### ${name} ###${lsep}" }
+  }
+
+  yarn {
+    execOverrides {
+      it.standardOutput = new FileOutputStream(log, true)
+      it.errorOutput = new FileOutputStream(errLog, true)
+    }
+    doFirst { log << "### ${name} ###${lsep}" }
+  }
+
+  task build(type: YarnTask, dependsOn: yarn) {
+    description "Build ${project.name}."
+    args = ['run', devBuild ? 'devBuild' : 'build']
+    execOverrides {
+      it.standardOutput = new FileOutputStream(log, true)
+//      it.errorOutput = new FileOutputStream(errLog, true)
+    }
+    inputs.property 'devBuild', devBuild
+    inputs.dir nodeModsDir
+    inputs.dir 'src'
+    inputs.file 'package.json'
+    inputs.file 'webpack.config.js'
+    outputs.dir buildDir
+    doFirst { log << "### ${name} ###${lsep}" }
+  }
+
+  task clean {
+    doLast{
+      delete cacheDir, logsDir, nodeModsDir, buildDir
+    }
+  }
+}
+
+if (gradle.startParameter.taskNames.contains('genScript')) {
+  apply from: 'gradle/genScript.gradle'
+}

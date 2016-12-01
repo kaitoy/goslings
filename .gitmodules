@@ -1,0 +1,3 @@
+[submodule "goslings-client"]
+	path = goslings-client
+	url = https://github.com/kaitoy/goslings-client.git

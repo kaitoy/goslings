@@ -1,0 +1,41 @@
+/*
+ * Goslings - Git Objects Browser
+ * https://github.com/kaitoy/goslings
+ * MIT licensed
+ *
+ * Copyright (C) 2016 Kaito Yamada
+ */
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVer}"
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+archivesBaseName = 'goslings-server'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+processResources {
+  from project(':goslings-client').tasks.build
+  destinationDir = new File(sourceSets.main.output.resourcesDir, 'static')
+}
+
+dependencies {
+  compile "org.springframework.boot:spring-boot-starter-web:${springBootVer}"
+  compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVer}"
+  compile "org.eclipse.jgit:org.eclipse.jgit:${jgitVer}"
+  compile 'org.springframework.boot:spring-boot-devtools'
+}
