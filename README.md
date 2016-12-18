@@ -10,6 +10,7 @@ Contents
 * [Download](#download)
 * [Build](#build)
 * [How to Use](#how-to-use)
+* [GaaS](#gaas)
 * [License](#license)
 * [Contact](#contact)
 
@@ -80,6 +81,12 @@ and shows the Git [objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Obj
 * Configurations
     * `com.github.kaitoy.goslings.server.reposDir`: Set this property to change the path of the working directory.
     * `com.github.kaitoy.goslings.server.uriPrefix`: If this property is set, the Goslings server returns an error for a repository URI which doesn't start with the value of the property.
+
+GaaS
+----
+GaaS (Goslings as a Service) is available at http://www.goslings.tk/ .
+
+GaaS treats [my GitHub repositories](https://github.com/kaitoy) only.
 
 License
 -------
