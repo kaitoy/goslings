@@ -33,6 +33,10 @@ processResources {
   destinationDir = new File(sourceSets.main.output.resourcesDir, 'static')
 }
 
+bootRepackage {
+  excludeDevtools = true
+}
+
 dependencies {
   compile 'org.springframework.boot:spring-boot-starter-web'
   compile 'org.springframework.boot:spring-boot-starter-actuator'
