@@ -34,8 +34,8 @@ processResources {
 }
 
 dependencies {
-  compile "org.springframework.boot:spring-boot-starter-web"
-  compile "org.springframework.boot:spring-boot-starter-actuator"
+  compile 'org.springframework.boot:spring-boot-starter-web'
+  compile 'org.springframework.boot:spring-boot-starter-actuator'
   compile "org.eclipse.jgit:org.eclipse.jgit:${jgitVer}"
   compile 'org.springframework.boot:spring-boot-devtools'
 }
