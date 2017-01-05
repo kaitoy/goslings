@@ -1,5 +1,5 @@
 /*
- * Goslings - Git Objects Browser
+ * Goslings - Git Repository Visualizer
  * https://github.com/kaitoy/goslings
  * MIT licensed
  *
