@@ -28,10 +28,12 @@ archivesBaseName = 'goslings-server'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-processResources {
+task getClient(type: Copy) {
   from project(':goslings-client').tasks.build
-  destinationDir = new File(sourceSets.main.output.resourcesDir, 'static')
+  into new File(sourceSets.main.output.resourcesDir, 'static')
 }
+
+processResources.finalizedBy getClient
 
 bootRepackage {
   excludeDevtools = true
