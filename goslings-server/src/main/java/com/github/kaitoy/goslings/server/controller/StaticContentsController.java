@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(method=RequestMethod.GET)
 public final class StaticContentsController {
 
-  /**
-   * @return path to the index.html
-   */
-  @RequestMapping(path="/")
-  public String root() {
-      return "/index.html";
-  }
+//  /**
+//   * @return path to the index.html
+//   */
+//  @RequestMapping(path="/")
+//  public String root() {
+//      return "/index.html";
+//  }
 
 //  /**
 //   * @return path to the error.html
