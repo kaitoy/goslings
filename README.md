@@ -51,7 +51,7 @@ How to Use
 ----------
 JRE 8+ is required to run Goslings server.
 
-Run `java -jar goslings/goslings-server/build/libs/goslings-server-0.0.1.jar --server.port 80` to start Goslings server.
+Run `java -jar goslings/goslings-server/build/libs/goslings-server-0.0.1.jar --server.port=80` to start Goslings server.
 After the startup completes, open `http://localhost` by a Web browser. You will see Goslings GUI like below:
 
 ![goslings-form](https://github.com/kaitoy/goslings/raw/master/www/images/goslings-form.png)
